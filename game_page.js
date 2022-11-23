@@ -1,0 +1,80 @@
+player1_name=localStorage.getItem("player1_name");
+player2_name=localStorage.getItem("player2_name");
+
+
+
+player1_score=0;
+player2_score=0;
+document.getElementById("player_1_name").innerHTML=player1_name+" : ";
+document.getElementById("player_2_name").innerHTML=player2_name+" : ";
+
+document.getElementById("player_1_score").innerHTML=player1_score;
+document.getElementById("player_2_score").innerHTML=player2_score;
+
+document.getElementById("player_question").innerHTML="Question turn - "+player1_name;
+document.getElementById("player_answer").innerHTML="Answer turn - "+player2_name;
+
+function send(){
+
+    number1=document.getElementById("Number_1").value;
+    number2=document.getElementById("Number_2").value;
+    answer=parseInt(number1) * parseInt(number2);
+
+question_word="<h4 id='word_display'> Q.  "+number1+"x"+number2+"</h4>";
+input_box="<br> Answer : <input type='text' id='input_check_box' >";
+check_button="<br> <br> <button class='btn btn-info' onclick='check()' > check </button>";
+row=question_word+input_box+check_button;
+
+document.getElementById("output").innerHTML=row;
+document.getElementById("Number_1").value="";
+document.getElementById("Number_2").value="";
+
+}
+
+answer_turn="player_2";
+question_turn="player_1";
+
+function check(){
+
+user_answer=document.getElementById("input_check_box").value;
+
+
+if(answer==user_answer){
+
+if(answer_turn=="player_1"){
+
+player1_score=player1_score+1;
+document.getElementById("player_1_score").innerHTML=player1_score;
+} 
+else{
+
+player2_score=player2_score+1;
+
+document.getElementById("player_2_score").innerHTML=player2_score;
+
+}
+
+}
+
+if(question_turn=="player_1"){
+question_turn="player_2";
+document.getElementById("player_question").innerHTML="Question turn - "+player1_name;
+
+}
+else{
+    question_turn="player_1";
+    document.getElementById("player_question").innerHTML="Question turn - "+player2_name;
+}
+
+if(answer_turn=="player_1"){
+   answer_turn="player_2";
+    document.getElementById("player_answer").innerHTML="Answer turn - "+player1_name;
+    
+    }
+    else{
+       answer_turn="player_1";
+        document.getElementById("player_answer").innerHTML="Answer turn - "+player2_name;
+    }
+
+    document.getElementById("output").innerHTML="";
+}
